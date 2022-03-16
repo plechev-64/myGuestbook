@@ -4,6 +4,21 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+  default_admin_email: plechev.a@ya.ru
+
+  default_domain: '127.0.0.1'
+  default_scheme: 'http'
+
+  router.request_context.host: '%env(default:default_domain:SYMFONY_DEFAULT_ROUTE_HOST)%'
+  router.request_context.scheme: '%env(default:default_scheme:SYMFONY_DEFAULT_ROUTE_SCHEME)%'
+
+  rediscache:
+    type: redis:5.0
+
+  queue:
+    type: rabbitmq:3.7
+    disk: 1024
+    size: S
 
 services:
   # default configuration for services in *this* file
@@ -13,6 +28,7 @@ services:
     bind:
       $akismetKey: "%env(AKISMET_KEY)%"
       $photoDir: "%kernel.project_dir%/public/uploads/photos"
+      $adminEmail: "%env(string:default:default_admin_email:ADMIN_EMAIL)%"
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
   App\:
