@@ -12,6 +12,8 @@ parameters:
   router.request_context.host: '%env(default:default_domain:SYMFONY_DEFAULT_ROUTE_HOST)%'
   router.request_context.scheme: '%env(default:default_scheme:SYMFONY_DEFAULT_ROUTE_SCHEME)%'
 
+  app.supported_locales: 'en|fr'
+
   rediscache:
     type: redis:5.0
 

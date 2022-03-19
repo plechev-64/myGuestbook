@@ -25,7 +25,7 @@ class ConferenceControllerTest extends WebTestCase
         $client = static::createClient();
         //$client = static::createPantherClient(['external_base_uri' => $_SERVER['SYMFONY_DEFAULT_ROUTE_URL']]);
 
-        $client->request('GET', 'conference/amsterdam-2019');
+        $client->request('GET', 'en/conference/amsterdam-2019');
         $client->submitForm('Submit', [
             'comment_form[author]' => 'Fabien',
             'comment_form[text]' => 'Some feedback from an automated functional test',
@@ -48,7 +48,7 @@ class ConferenceControllerTest extends WebTestCase
         $client = static::createClient();
         //$client = static::createPantherClient(['external_base_uri' => $_SERVER['SYMFONY_DEFAULT_ROUTE_URL']]);
 
-        $crawler = $client->request('GET', '');
+        $crawler = $client->request('GET', 'en/');
 
         $this->assertCount(2, $crawler->filter('h4'));
 
@@ -63,7 +63,7 @@ class ConferenceControllerTest extends WebTestCase
     public function testMailerAssertions()
     {
         $client = static::createClient();
-        $client->request('GET', '/');
+        $client->request('GET', '/en');
         $this->assertEmailCount(1);
         $event = $this->getMailerEvent(0);
         $this->assertEmailIsQueued($event);
